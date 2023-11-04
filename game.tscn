@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://i4kdxnwlg1d5"]
+
+[ext_resource type="Script" path="res://WordManager.gd" id="1_hlhic"]
+[ext_resource type="Script" path="res://GameManager.gd" id="1_u6n1l"]
+[ext_resource type="Script" path="res://WordFactory.gd" id="2_6mc6e"]
+[ext_resource type="Script" path="res://TypedInputReceiver.gd" id="3_glxhf"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("incantation_label")]
+script = ExtResource("1_u6n1l")
+incantation_label = NodePath("Incantation/IncantationText")
+
+[node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input", "cooldown_timer")]
+script = ExtResource("1_hlhic")
+factory = NodePath("WordFactory")
+typed_input = NodePath("TypedInputReceiver")
+cooldown_timer = NodePath("CooldownTimer")
+
+[node name="WordFactory" type="Node" parent="WordManager"]
+script = ExtResource("2_6mc6e")
+
+[node name="TypedInputReceiver" type="Node" parent="WordManager"]
+script = ExtResource("3_glxhf")
+
+[node name="CooldownTimer" type="Timer" parent="WordManager"]
+one_shot = true
+
+[node name="Incantation" type="Node2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="IncantationText" type="RichTextLabel" parent="Incantation"]
+modulate = Color(1, 1, 1, 0.215686)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -75.0
+offset_right = 500.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]TYPOMANCER[/center]"
+autowrap_mode = 0
+
+[connection signal="on_match_found" from="WordManager" to="." method="_on_word_manager_on_match_found"]
+[connection signal="unused_words_exhausted" from="WordManager/WordFactory" to="WordManager" method="_on_word_factory_unused_words_exhausted"]
+[connection signal="input_updated" from="WordManager/TypedInputReceiver" to="." method="_on_typed_input_receiver_input_updated"]
+[connection signal="input_updated" from="WordManager/TypedInputReceiver" to="WordManager" method="_on_typed_input_receiver_input_updated"]
+[connection signal="timeout" from="WordManager/CooldownTimer" to="WordManager" method="_on_cooldown_timer_timeout"]
