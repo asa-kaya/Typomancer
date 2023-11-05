@@ -9,6 +9,8 @@ var _cooldown: int = 1
 var _word_selection: Array[String] = []
 
 signal on_match_found(word: String)
+signal word_selection_word_added(word: String)
+signal word_selection_remove_at(index: int)
 
 func _ready():
 	factory.add_word("wash")
@@ -23,12 +25,14 @@ func _ready():
 func add_word(word: String):
 	if (not word.is_empty()):
 		_word_selection.append(word)
+		word_selection_word_added.emit(word)
 		print(",".join(_word_selection))
 
 func remove_word(word: String):
 	var index := _word_selection.find(word)
 	if index < len(_word_selection):
 		_word_selection.remove_at(index)
+		word_selection_remove_at.emit(index)
 
 func _process_word_match(word: String):
 	remove_word(word)

@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://i4kdxnwlg1d5"]
+[gd_scene load_steps=6 format=3 uid="uid://i4kdxnwlg1d5"]
 
 [ext_resource type="Script" path="res://WordManager.gd" id="1_hlhic"]
 [ext_resource type="Script" path="res://GameManager.gd" id="1_u6n1l"]
 [ext_resource type="Script" path="res://WordFactory.gd" id="2_6mc6e"]
 [ext_resource type="Script" path="res://TypedInputReceiver.gd" id="3_glxhf"]
+[ext_resource type="PackedScene" uid="uid://dm6lproqtp3qd" path="res://spell_selection_item.tscn" id="5_mhkhh"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("incantation_label")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("incantation_label", "spell_selection_container")]
 script = ExtResource("1_u6n1l")
 incantation_label = NodePath("Incantation/IncantationText")
+spell_selection_container = NodePath("SpellSelection")
+spell_selection_item_prefab = ExtResource("5_mhkhh")
 
 [node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input", "cooldown_timer")]
 script = ExtResource("1_hlhic")
@@ -47,7 +50,22 @@ bbcode_enabled = true
 text = "[center]TYPOMANCER[/center]"
 autowrap_mode = 0
 
+[node name="SpellSelection" type="HFlowContainer" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = 443.0
+offset_right = 1152.0
+offset_bottom = 493.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+
 [connection signal="on_match_found" from="WordManager" to="." method="_on_word_manager_on_match_found"]
+[connection signal="word_selection_remove_at" from="WordManager" to="." method="_on_word_manager_word_selection_remove_at"]
+[connection signal="word_selection_word_added" from="WordManager" to="." method="_on_word_manager_word_selection_word_added"]
 [connection signal="unused_words_exhausted" from="WordManager/WordFactory" to="WordManager" method="_on_word_factory_unused_words_exhausted"]
 [connection signal="input_updated" from="WordManager/TypedInputReceiver" to="." method="_on_typed_input_receiver_input_updated"]
 [connection signal="input_updated" from="WordManager/TypedInputReceiver" to="WordManager" method="_on_typed_input_receiver_input_updated"]
