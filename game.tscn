@@ -64,9 +64,9 @@ size_flags_horizontal = 3
 alignment = 1
 
 [connection signal="on_match_found" from="WordManager" to="." method="_on_word_manager_on_match_found"]
+[connection signal="word_selection_modified" from="WordManager" to="." method="_on_word_manager_word_selection_modified"]
 [connection signal="word_selection_remove_at" from="WordManager" to="." method="_on_word_manager_word_selection_remove_at"]
 [connection signal="word_selection_word_added" from="WordManager" to="." method="_on_word_manager_word_selection_word_added"]
-[connection signal="unused_words_exhausted" from="WordManager/WordFactory" to="WordManager" method="_on_word_factory_unused_words_exhausted"]
 [connection signal="input_updated" from="WordManager/TypedInputReceiver" to="." method="_on_typed_input_receiver_input_updated"]
 [connection signal="input_updated" from="WordManager/TypedInputReceiver" to="WordManager" method="_on_typed_input_receiver_input_updated"]
 [connection signal="timeout" from="WordManager/CooldownTimer" to="WordManager" method="_on_cooldown_timer_timeout"]

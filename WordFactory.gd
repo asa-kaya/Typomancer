@@ -4,8 +4,6 @@ extends Node
 var _word_bank: Array[String] = []
 var _unused_words: Array[String] = []
 
-signal unused_words_exhausted()
-
 func add_word(word: String):
 	_word_bank.append(word.to_upper())
 	_word_bank.sort()	
@@ -26,17 +24,12 @@ func use_word(word: String):
 		return ""
 
 func random_word() -> String:
-	if _unused_words.is_empty():
-		unused_words_exhausted.emit()
-		return ""
-	
 	var index := randi() % len(_unused_words)
 	var word := _unused_words[index]
 	_unused_words.remove_at(index)
+	
 	return word
 
-func reload(excludes: Array[String]):
-	print("reloading...")
-	_unused_words = _word_bank.duplicate()
-	for excluded in excludes:
-		use_word(excluded)
+func return_used_word(word: String):
+	_unused_words.append(word)
+	_unused_words.sort()

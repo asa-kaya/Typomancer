@@ -23,5 +23,5 @@ func _on_word_manager_word_selection_word_added(word):
 func _on_word_manager_word_selection_remove_at(index):
 	spell_selection_container.remove_child(spell_selection_container.get_child(index))
 
-
-
+func _on_word_manager_word_selection_modified(index, new_word):
+	(spell_selection_container.get_child(index) as SpellSelectionItem).spell = new_word
