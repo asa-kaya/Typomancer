@@ -4,9 +4,15 @@ extends Node
 var _word_bank: Array[String] = []
 var _unused_words: Array[String] = []
 
+func init(word_bank: Array[String]):
+	_word_bank  = word_bank.duplicate()
+	_word_bank.sort()
+	_unused_words = _word_bank.duplicate()
+	_unused_words.sort()
+
 func add_word(word: String):
 	_word_bank.append(word.to_upper())
-	_word_bank.sort()	
+	_word_bank.sort()
 	_unused_words.append(word.to_upper())
 	_unused_words.sort()
 

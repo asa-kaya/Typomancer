@@ -13,11 +13,8 @@ signal word_selection_word_added(word: String)
 signal word_selection_remove_at(index: int)
 signal word_selection_modified(index: int, new_word: String)
 
-func _ready():
-	factory.add_word("wash")
-	factory.add_word("cow")
-	factory.add_word("man")
-	
+func init(word_bank: Array[String]):
+	factory.init(word_bank)
 	cooldown_timer.wait_time = _cooldown
 	
 	add_word(factory.random_word())
