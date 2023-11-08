@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var db: Node
 @export var word_manager: WordManager
 @export var incantation_label: RichTextLabel
 @export var spell_selection_container: Container
@@ -10,7 +9,7 @@ var spells: CastleDB
 
 func _ready():
 	var spells_table: Array[String]
-	spells_table.assign(db.table_spells.all.map(func(spell): return spell.incantation as String))
+	spells_table.assign(DB.table_spells.all.map(func(spell): return spell.incantation))
 	word_manager.init(spells_table)
 
 func _on_typed_input_receiver_input_updated(str: String):

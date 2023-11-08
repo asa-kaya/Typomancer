@@ -1,15 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://i4kdxnwlg1d5"]
+[gd_scene load_steps=6 format=3 uid="uid://i4kdxnwlg1d5"]
 
 [ext_resource type="Script" path="res://WordManager.gd" id="1_hlhic"]
 [ext_resource type="Script" path="res://GameManager.gd" id="1_u6n1l"]
 [ext_resource type="Script" path="res://WordFactory.gd" id="2_6mc6e"]
-[ext_resource type="Script" uid="uid://dommi3gkmuui5" path="res://data.cdb" id="2_k8ys5"]
 [ext_resource type="Script" path="res://TypedInputReceiver.gd" id="3_glxhf"]
 [ext_resource type="PackedScene" uid="uid://dm6lproqtp3qd" path="res://spell_selection_item.tscn" id="5_mhkhh"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("db", "word_manager", "incantation_label", "spell_selection_container")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("word_manager", "incantation_label", "spell_selection_container")]
 script = ExtResource("1_u6n1l")
-db = NodePath("Database")
 word_manager = NodePath("WordManager")
 incantation_label = NodePath("Incantation/IncantationText")
 spell_selection_container = NodePath("SpellSelection")
@@ -65,9 +63,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 alignment = 1
-
-[node name="Database" type="Node" parent="."]
-script = ExtResource("2_k8ys5")
 
 [connection signal="on_match_found" from="WordManager" to="." method="_on_word_manager_on_match_found"]
 [connection signal="word_selection_modified" from="WordManager" to="." method="_on_word_manager_word_selection_modified"]

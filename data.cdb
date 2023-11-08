@@ -4,7 +4,7 @@
 			"name": "Spells",
 			"columns": [
 				{
-					"typeStr": "1",
+					"typeStr": "0",
 					"name": "incantation"
 				},
 				{
@@ -19,59 +19,59 @@
 			],
 			"lines": [
 				{
-					"incantation": "BIG",
 					"rarity": 1000,
-					"size_multiplier": 1.2
+					"size_multiplier": 1.2,
+					"incantation": "BIG"
 				},
 				{
-					"incantation": "HUGE",
 					"rarity": 750,
-					"size_multiplier": 1.5
+					"size_multiplier": 1.5,
+					"incantation": "HUGE"
 				},
 				{
-					"incantation": "HUMONGOUS",
 					"rarity": 300,
-					"size_multiplier": 2.5
+					"size_multiplier": 2.5,
+					"incantation": "HUMONGOUS"
 				},
 				{
-					"incantation": "GIANT",
 					"rarity": 400,
-					"size_multiplier": 2
+					"size_multiplier": 2,
+					"incantation": "GIANT"
 				},
 				{
-					"incantation": "GIGANTIC",
 					"rarity": 600,
-					"size_multiplier": 2
+					"size_multiplier": 2,
+					"incantation": "GIGANTIC"
 				},
 				{
-					"incantation": "TITANIC",
 					"rarity": 100,
-					"size_multiplier": 2.5
+					"size_multiplier": 2.5,
+					"incantation": "TITANIC"
 				},
 				{
-					"incantation": "GROW",
 					"rarity": 1400,
-					"size_multiplier": 1.2
+					"size_multiplier": 1.2,
+					"incantation": "GROW"
 				},
 				{
-					"incantation": "DEVELOP",
 					"rarity": 1500,
-					"size_multiplier": 1.3
+					"size_multiplier": 1.3,
+					"incantation": "DEVELOP"
 				},
 				{
-					"incantation": "LARGE",
 					"rarity": 800,
-					"size_multiplier": 1.3
+					"size_multiplier": 1.3,
+					"incantation": "LARGE"
 				},
 				{
-					"incantation": "EXTRALARGE",
 					"rarity": 800,
-					"size_multiplier": 1.7
+					"size_multiplier": 1.7,
+					"incantation": "EXTRALARGE"
 				},
 				{
-					"incantation": "GAIN",
 					"rarity": 1400,
-					"size_multiplier": 1.2
+					"size_multiplier": 1.2,
+					"incantation": "GAIN"
 				}
 			],
 			"separators": [],
