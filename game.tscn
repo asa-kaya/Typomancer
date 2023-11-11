@@ -1,17 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://i4kdxnwlg1d5"]
+[gd_scene load_steps=7 format=3 uid="uid://i4kdxnwlg1d5"]
 
 [ext_resource type="Script" path="res://WordManager.gd" id="1_hlhic"]
 [ext_resource type="Script" path="res://GameManager.gd" id="1_u6n1l"]
 [ext_resource type="Script" path="res://WordFactory.gd" id="2_6mc6e"]
 [ext_resource type="Script" path="res://TypedInputReceiver.gd" id="3_glxhf"]
 [ext_resource type="PackedScene" uid="uid://dm6lproqtp3qd" path="res://spell_selection_item.tscn" id="5_mhkhh"]
+[ext_resource type="Script" path="res://Player.gd" id="6_4u2gx"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("word_manager", "incantation_label", "spell_selection_container")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("word_manager", "player", "incantation_label", "spell_selection_container")]
 script = ExtResource("1_u6n1l")
 word_manager = NodePath("WordManager")
+player = NodePath("Player")
 incantation_label = NodePath("Incantation/IncantationText")
 spell_selection_container = NodePath("SpellSelection")
 spell_selection_item_prefab = ExtResource("5_mhkhh")
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("_spell_position")]
+script = ExtResource("6_4u2gx")
+_spell_scale = 500.0
+_spell_position = NodePath("SpellPosition")
+
+[node name="SpellPosition" type="Node2D" parent="Player"]
+position = Vector2(776, 324)
 
 [node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input", "cooldown_timer")]
 script = ExtResource("1_hlhic")

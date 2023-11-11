@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var word_manager: WordManager
+@export var player: Player
 @export var incantation_label: RichTextLabel
 @export var spell_selection_container: Container
 @export var spell_selection_item_prefab: PackedScene
@@ -21,6 +22,9 @@ func _on_word_manager_on_match_found(word):
 	var tween := get_tree().create_tween()
 	tween.tween_property(incantation_label, "modulate", Color(1, 1, 1, .1), 1)
 	tween.tween_callback(func(): incantation_label.set_modulate(default_color))
+	
+	var multiplier: float = DB.table_spells.get_value(word).size_multiplier
+	player.multiply_spell_scale(multiplier)
 
 func _on_word_manager_word_selection_word_added(word):
 	var o := spell_selection_item_prefab.instantiate()
