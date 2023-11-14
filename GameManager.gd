@@ -29,6 +29,7 @@ func _on_word_manager_on_match_found(word):
 func _on_word_manager_word_selection_word_added(word):
 	var o := spell_selection_item_prefab.instantiate()
 	(o as SpellSelectionItem).spell = word
+	word_manager.typed_input_updated.connect((o as SpellSelectionItem).compare_and_highlight)
 	spell_selection_container.add_child(o)
 
 func _on_word_manager_word_selection_remove_at(index):

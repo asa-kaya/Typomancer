@@ -12,6 +12,7 @@ signal on_match_found(word: String)
 signal word_selection_word_added(word: String)
 signal word_selection_remove_at(index: int)
 signal word_selection_modified(index: int, new_word: String)
+signal typed_input_updated(str: String)
 
 func init(word_bank: Array[String]):
 	factory.init(word_bank)
@@ -50,6 +51,8 @@ func _process_word_match(word: String):
 	on_match_found.emit(word)
 
 func _on_typed_input_receiver_input_updated(str: String):
+	typed_input_updated.emit(str)
+	
 	if (cooldown_timer.is_stopped() and _word_selection.has(str)):
 		_process_word_match(str)
 
