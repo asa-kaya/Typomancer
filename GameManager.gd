@@ -20,7 +20,7 @@ func _on_word_manager_on_match_found(word):
 	var default_color := incantation_label.modulate
 	incantation_label.set_modulate(Color.WHITE)
 	var tween := get_tree().create_tween()
-	tween.tween_property(incantation_label, "modulate", Color(1, 1, 1, .1), 1)
+	tween.tween_property(incantation_label, "modulate", Color(1, 1, 1, .1), 0)
 	tween.tween_callback(func(): incantation_label.set_modulate(default_color))
 	
 	var multiplier: float = DB.table_spells.get_value(word).size_multiplier

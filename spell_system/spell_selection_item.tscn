@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm6lproqtp3qd"]
 
-[ext_resource type="Script" path="res://SpellSelectionItem.gd" id="1_ba1ke"]
+[ext_resource type="Script" path="res://spell_system/SpellSelectionItem.gd" id="1_7qavg"]
 
 [node name="SpellSelectionItem" type="RichTextLabel"]
 clip_contents = false
@@ -8,4 +8,4 @@ custom_minimum_size = Vector2(200, 50)
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
-script = ExtResource("1_ba1ke")
+script = ExtResource("1_7qavg")

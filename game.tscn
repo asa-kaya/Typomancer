@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://i4kdxnwlg1d5"]
 
-[ext_resource type="Script" path="res://WordManager.gd" id="1_hlhic"]
 [ext_resource type="Script" path="res://GameManager.gd" id="1_u6n1l"]
-[ext_resource type="Script" path="res://WordFactory.gd" id="2_6mc6e"]
-[ext_resource type="Script" path="res://TypedInputReceiver.gd" id="3_glxhf"]
-[ext_resource type="PackedScene" uid="uid://dm6lproqtp3qd" path="res://spell_selection_item.tscn" id="5_mhkhh"]
+[ext_resource type="PackedScene" uid="uid://dm6lproqtp3qd" path="res://spell_system/spell_selection_item.tscn" id="2_2mj1w"]
+[ext_resource type="Script" path="res://word_system/WordManager.gd" id="4_clmu3"]
+[ext_resource type="Script" path="res://word_system/WordFactory.gd" id="5_clx2s"]
 [ext_resource type="Script" path="res://Player.gd" id="6_4u2gx"]
+[ext_resource type="Script" path="res://word_system/TypedInputReceiver.gd" id="6_4v8va"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("word_manager", "player", "incantation_label", "spell_selection_container")]
 script = ExtResource("1_u6n1l")
@@ -13,7 +13,7 @@ word_manager = NodePath("WordManager")
 player = NodePath("Player")
 incantation_label = NodePath("Incantation/IncantationText")
 spell_selection_container = NodePath("SpellSelection")
-spell_selection_item_prefab = ExtResource("5_mhkhh")
+spell_selection_item_prefab = ExtResource("2_2mj1w")
 
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("_spell_position")]
 script = ExtResource("6_4u2gx")
@@ -24,19 +24,16 @@ _spell_position = NodePath("SpellPosition")
 position = Vector2(776, 324)
 
 [node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input", "cooldown_timer")]
-script = ExtResource("1_hlhic")
+script = ExtResource("4_clmu3")
 factory = NodePath("WordFactory")
 typed_input = NodePath("TypedInputReceiver")
-cooldown_timer = NodePath("CooldownTimer")
+cooldown_timer = NodePath("")
 
 [node name="WordFactory" type="Node" parent="WordManager"]
-script = ExtResource("2_6mc6e")
+script = ExtResource("5_clx2s")
 
 [node name="TypedInputReceiver" type="Node" parent="WordManager"]
-script = ExtResource("3_glxhf")
-
-[node name="CooldownTimer" type="Timer" parent="WordManager"]
-one_shot = true
+script = ExtResource("6_4v8va")
 
 [node name="Incantation" type="Node2D" parent="."]
 position = Vector2(576, 324)
@@ -80,4 +77,3 @@ alignment = 1
 [connection signal="word_selection_word_added" from="WordManager" to="." method="_on_word_manager_word_selection_word_added"]
 [connection signal="input_updated" from="WordManager/TypedInputReceiver" to="." method="_on_typed_input_receiver_input_updated"]
 [connection signal="input_updated" from="WordManager/TypedInputReceiver" to="WordManager" method="_on_typed_input_receiver_input_updated"]
-[connection signal="timeout" from="WordManager/CooldownTimer" to="WordManager" method="_on_cooldown_timer_timeout"]

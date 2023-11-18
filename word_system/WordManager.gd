@@ -5,7 +5,6 @@ extends Node
 @export var typed_input: TypedInputReceiver
 @export var cooldown_timer: Timer
 
-var _cooldown: int = 1
 var _word_selection: Array[String] = []
 
 signal on_match_found(word: String)
@@ -16,7 +15,6 @@ signal typed_input_updated(str: String)
 
 func init(word_bank: Array[String]):
 	factory.init(word_bank)
-	cooldown_timer.wait_time = _cooldown
 	
 	add_word(factory.random_word())
 	add_word(factory.random_word())
@@ -43,19 +41,12 @@ func replace_word_at(index: int, new_word: String):
 	word_selection_modified.emit(index, new_word)
 
 func _process_word_match(word: String):
-	#remove_word(word)
-	#add_word(factory.random_word())
 	replace_word_at(find_word(word), factory.random_word())
-	typed_input.set_process_mode(Node.PROCESS_MODE_DISABLED)
-	cooldown_timer.start()
+	typed_input.reset()
 	on_match_found.emit(word)
 
 func _on_typed_input_receiver_input_updated(str: String):
 	typed_input_updated.emit(str)
 	
-	if (cooldown_timer.is_stopped() and _word_selection.has(str)):
+	if (_word_selection.has(str)):
 		_process_word_match(str)
-
-func _on_cooldown_timer_timeout():
-	typed_input.reset()
-	typed_input.set_process_mode(Node.PROCESS_MODE_INHERIT)
