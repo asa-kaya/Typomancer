@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://8hbqnxqlhe8q"]
+
+[ext_resource type="Script" path="res://enemy/EnemyData.gd" id="1_lphuw"]
+[ext_resource type="SpriteFrames" uid="uid://bgmi1if04is2l" path="res://enemy/sf_prototype.tres" id="2_mlalc"]
+
+[resource]
+script = ExtResource("1_lphuw")
+name = "Chupakraber"
+health = 10
+actions = Array[int]([1, 2, 3])
+sprite_frames = ExtResource("2_mlalc")

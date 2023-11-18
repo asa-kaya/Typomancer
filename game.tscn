@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://i4kdxnwlg1d5"]
+[gd_scene load_steps=9 format=3 uid="uid://i4kdxnwlg1d5"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_u6n1l"]
 [ext_resource type="PackedScene" uid="uid://dm6lproqtp3qd" path="res://spell_system/spell_selection_item.tscn" id="2_2mj1w"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://word_system/WordFactory.gd" id="5_clx2s"]
 [ext_resource type="Script" path="res://Player.gd" id="6_4u2gx"]
 [ext_resource type="Script" path="res://word_system/TypedInputReceiver.gd" id="6_4v8va"]
+[ext_resource type="PackedScene" uid="uid://bgv7ssidl1dqf" path="res://enemy/enemy.tscn" id="7_6nywu"]
+[ext_resource type="Resource" uid="uid://8hbqnxqlhe8q" path="res://enemy/enemies/test_enemy.tres" id="8_exxrd"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("word_manager", "player", "incantation_label", "spell_selection_container")]
 script = ExtResource("1_u6n1l")
@@ -21,7 +23,7 @@ _spell_scale = 500.0
 _spell_position = NodePath("SpellPosition")
 
 [node name="SpellPosition" type="Node2D" parent="Player"]
-position = Vector2(776, 324)
+position = Vector2(200, 324)
 
 [node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input", "cooldown_timer")]
 script = ExtResource("4_clmu3")
@@ -70,6 +72,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="Enemy" parent="." instance=ExtResource("7_6nywu")]
+data = ExtResource("8_exxrd")
 
 [connection signal="on_match_found" from="WordManager" to="." method="_on_word_manager_on_match_found"]
 [connection signal="word_selection_modified" from="WordManager" to="." method="_on_word_manager_word_selection_modified"]

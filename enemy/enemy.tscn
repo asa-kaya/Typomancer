@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgv7ssidl1dqf"]
+
+[ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_b376u"]
+[ext_resource type="SpriteFrames" uid="uid://bgmi1if04is2l" path="res://enemy/sf_prototype.tres" id="2_bfn4u"]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_b376u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_bfn4u")
+
+[node name="ActionTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
