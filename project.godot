@@ -17,16 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DB="*res://data.cdb"
-DB2="*res://Database.gd"
+DB="*res://Database.gd"
 
 [display]
 
 window/stretch/mode="viewport"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/gdcastledb/plugin.cfg")
 
 [rendering]
 

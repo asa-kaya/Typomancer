@@ -6,11 +6,12 @@ extends Node2D
 @export var spell_selection_container: Container
 @export var spell_selection_item_prefab: PackedScene
 
-var spells: CastleDB
-
 func _ready():
-	var spells_table: Array[String]
-	spells_table.assign(DB.table_spells.all.map(func(spell): return spell.incantation))
+	var spells_table: Array[String] = []
+	
+	for spell_id in DB.spells.get_all_ids():
+		spells_table.append_array(DB.spells.get_value(spell_id).keywords)
+	print(spells_table)
 	word_manager.init(spells_table)
 
 func _on_typed_input_receiver_input_updated(str: String):
@@ -23,7 +24,7 @@ func _on_word_manager_on_match_found(word):
 	tween.tween_property(incantation_label, "modulate", Color(1, 1, 1, .1), 0)
 	tween.tween_callback(func(): incantation_label.set_modulate(default_color))
 	
-	var multiplier: float = DB.table_spells.get_value(word).size_multiplier
+	var multiplier: float = DB.spells.get_from_keyword(word).damage
 	player.multiply_spell_scale(multiplier)
 
 func _on_word_manager_word_selection_word_added(word):
