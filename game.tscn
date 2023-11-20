@@ -25,11 +25,10 @@ _spell_position = NodePath("SpellPosition")
 [node name="SpellPosition" type="Node2D" parent="Player"]
 position = Vector2(200, 324)
 
-[node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input", "cooldown_timer")]
+[node name="WordManager" type="Node" parent="." node_paths=PackedStringArray("factory", "typed_input")]
 script = ExtResource("4_clmu3")
 factory = NodePath("WordFactory")
 typed_input = NodePath("TypedInputReceiver")
-cooldown_timer = NodePath("")
 
 [node name="WordFactory" type="Node" parent="WordManager"]
 script = ExtResource("5_clx2s")
