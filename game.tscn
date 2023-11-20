@@ -73,7 +73,7 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="Enemy" parent="." instance=ExtResource("7_6nywu")]
-data = ExtResource("8_exxrd")
+enemy = ExtResource("8_exxrd")
 
 [connection signal="on_match_found" from="WordManager" to="." method="_on_word_manager_on_match_found"]
 [connection signal="word_selection_modified" from="WordManager" to="." method="_on_word_manager_word_selection_modified"]
