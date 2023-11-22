@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DB="*res://Database.gd"
 EventBus="*res://EventBus.gd"
+StatusManager="*res://StatusManager.gd"
 
 [display]
 

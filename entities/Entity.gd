@@ -20,7 +20,11 @@ func take_damage(value: int):
 	print("%s has %d / %d HP left" % [_name, _current_hp, _max_hp])
 
 func apply_status(status: Status):
-	status.apply()
+	_statuses.append(status)
+	StatusManager.apply(status, self)
+
+func has_stacks(status: Status) -> bool:
+	return _statuses.any(func(s): return s.id == status.id)
 
 func _on_damage_dealt(caster: Entity, value: int):
 	if caster == self:
