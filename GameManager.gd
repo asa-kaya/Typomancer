@@ -24,7 +24,7 @@ func _on_word_manager_on_match_found(word):
 	tween.tween_property(incantation_label, "modulate", Color(1, 1, 1, .1), 0)
 	tween.tween_callback(func(): incantation_label.set_modulate(default_color))
 	
-	DB.spells.get_from_keyword(word).cast()
+	DB.spells.get_from_keyword(word).cast(player)
 
 func _on_word_manager_word_selection_word_added(word):
 	var o := spell_selection_item_prefab.instantiate()

@@ -10,8 +10,13 @@ enum SpellType { ATTACK, HEAL, BUFF, DEBUFF }
 @export var damage: int
 @export var statuses: Array[Status]
 
-func cast():
-	EventBus.damage_dealt.emit(damage)
+func cast(caster: Entity):
+	if type == SpellType.ATTACK || type == SpellType.DEBUFF:
+		EventBus.damage_dealt.emit(caster, damage)
+		for status in statuses:
+			EventBus.debuff_applied.emit(caster, status)
 	
-	for status in statuses:
-		EventBus.status_applied.emit(status)
+	if type == SpellType.HEAL || type == SpellType.BUFF:
+		EventBus.health_restored.emit(caster, damage)
+		for status in statuses:
+			EventBus.buff_applied.emit(caster, status)

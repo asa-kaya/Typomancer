@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgv7ssidl1dqf"]
 
-[ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_b376u"]
-[ext_resource type="SpriteFrames" uid="uid://bgmi1if04is2l" path="res://enemy/sf_prototype.tres" id="2_bfn4u"]
+[ext_resource type="Script" path="res://entities/enemy/Enemy.gd" id="1_fu2ly"]
+[ext_resource type="SpriteFrames" uid="uid://bgmi1if04is2l" path="res://entities/enemy/sf_prototype.tres" id="2_x2y2o"]
 
 [node name="Enemy" type="Node2D"]
-script = ExtResource("1_b376u")
+script = ExtResource("1_fu2ly")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_bfn4u")
+sprite_frames = ExtResource("2_x2y2o")
 
 [node name="ActionTimer" type="Timer" parent="."]
 
