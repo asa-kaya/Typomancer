@@ -1,14 +1,17 @@
 class_name Spell
 extends Resource
 
-enum SpellType { ATTACK, BUFF, DEBUFF, STATUS }
+enum SpellType { ATTACK, HEAL, BUFF, DEBUFF }
 
 @export var id: String
 @export var name: String
 @export var keywords: Array[String]
 @export var type: SpellType
 @export var damage: int
+@export var statuses: Array[Status]
 
 func cast():
 	EventBus.damage_dealt.emit(damage)
-	EventBus.status_applied.emit(null)
+	
+	for status in statuses:
+		EventBus.status_applied.emit(status)

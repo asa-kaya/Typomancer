@@ -11,6 +11,7 @@ var _current_hp: int
 
 func _ready():
 	EventBus.damage_dealt.connect(_on_damage_dealt)
+	EventBus.status_applied.connect(_on_status_applied)
 	
 	sprite.set_sprite_frames(enemy.sprite_frames)
 	_current_hp = enemy.health
@@ -31,3 +32,6 @@ func _on_damage_dealt(value: int):
 	_current_hp -= value
 	print("%s took %d damage" % [enemy.name, value])
 	print("%s has %d / %d HP left" % [enemy.name, _current_hp, enemy.health])
+
+func _on_status_applied(status: Status):
+	status.apply()
