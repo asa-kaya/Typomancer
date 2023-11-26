@@ -54,7 +54,9 @@ func _on_damage_dealt(caster: Entity, value: int):
 
 func _on_health_restored(caster: Entity, value: int):
 	if caster == self:
-		_current_hp += value
+		_current_hp = clampi(_current_hp + value, 0, _max_hp)
+		print("%s has restored %d HP" % [_name, value])
+		print("%s has %d / %d HP left" % [_name, _current_hp, _max_hp])
 
 func _on_buff_applied(caster: Entity, status: Status):
 	if caster == self:
@@ -65,5 +67,5 @@ func _on_debuff_applied(caster: Entity, status: Status):
 		_target.apply_status(status)
 
 func _on_death():
-	print("%s died" % self.name)
+	print("%s died" % _name)
 	queue_free()
