@@ -19,6 +19,7 @@ spell_selection_item_prefab = ExtResource("2_2mj1w")
 
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("_spell_position")]
 script = ExtResource("3_gx8uw")
+health = 10
 _spell_scale = 500.0
 _spell_position = NodePath("SpellPosition")
 
