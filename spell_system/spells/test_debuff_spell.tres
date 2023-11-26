@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://dfr41o8ujp3vk"]
 
 [ext_resource type="Script" path="res://spell_system/Spell.gd" id="1_iltes"]
-[ext_resource type="Resource" uid="uid://cdn0ijqg8uiro" path="res://statuses/status_poison.tres" id="2_h5qp1"]
+[ext_resource type="Resource" uid="uid://cdn0ijqg8uiro" path="res://status_system/statuses/status_poison.tres" id="2_h5qp1"]
 
 [resource]
 script = ExtResource("1_iltes")
@@ -10,4 +10,4 @@ name = "Poison Point"
 keywords = Array[String](["GREEN", "GRADUAL", "SPILL"])
 type = 3
 damage = 0
-statuses = Array[Resource("res://statuses/Status.gd")]([ExtResource("2_h5qp1")])
+statuses = Array[Resource("res://status_system/Status.gd")]([ExtResource("2_h5qp1")])

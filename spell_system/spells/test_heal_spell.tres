@@ -9,4 +9,4 @@ name = "Simple Healing"
 keywords = Array[String](["RESTORE", "HEAL", "TREAT"])
 type = 1
 damage = 2
-statuses = Array[Resource("res://statuses/Status.gd")]([])
+statuses = Array[Resource("res://status_system/Status.gd")]([])

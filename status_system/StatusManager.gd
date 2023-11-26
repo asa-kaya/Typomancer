@@ -1,26 +1,26 @@
 extends Node
 
-func apply(status: Status, to: Entity):
-	match status.id:
+func apply(status: String, to: Entity):
+	match status:
 		"POISON":
-			_trigger_on_interval(1, status, to)
+			_trigger_on_interval(1, DB.statuses.get_value(status), to)
 		"SHIELD":
-			_trigger_before_damage(status, to)
+			_trigger_before_damage(DB.statuses.get_value(status), to)
 
 func trigger(status: Status, to: Entity, params: Dictionary = {}):
 	match status.id:
 		"POISON":
 			var new_hp: int = to.take_damage(1)
-			if to.has_stacks(status) and new_hp > 0:
+			if to.has_stacks(status.id) and new_hp > 0:
 				var t := get_tree().create_timer(1)
 				t.timeout.connect(func(): trigger(status, to))
 		"SHIELD":
-			if not to.has_stacks(status):
+			if not to.has_stacks(status.id):
 				return
 			var damage := params["damage"] as int
 			print("%s blocked %d damage" % [to._name, 1])
 			to.damage_mitigation = 1.0/damage
-			to.remove_stacks(status, 1)
+			to.remove_stacks(status.id, 1)
 
 '''
 DIFFERENT TRIGGER TYPES

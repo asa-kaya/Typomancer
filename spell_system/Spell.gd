@@ -14,9 +14,9 @@ func cast(caster: Entity):
 	if type == SpellType.ATTACK || type == SpellType.DEBUFF:
 		EventBus.damage_dealt.emit(caster, damage)
 		for status in statuses:
-			EventBus.debuff_applied.emit(caster, status)
+			EventBus.debuff_applied.emit(caster, status.id)
 	
 	if type == SpellType.HEAL || type == SpellType.BUFF:
 		EventBus.health_restored.emit(caster, damage)
 		for status in statuses:
-			EventBus.buff_applied.emit(caster, status)
+			EventBus.buff_applied.emit(caster, status.id)

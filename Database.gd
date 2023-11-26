@@ -6,6 +6,7 @@ class Table:
 	
 	func _generate_keys():
 		for i in range(len(_all)):
+			print("table = " + str(_all[i]))
 			self._keys[_all[i].id] = i
 	
 	func get_value(id: String):
@@ -19,12 +20,13 @@ class Table:
 		return arr
 
 class Spells extends Table:
-	func _init( ):
+	func _init():
 		var dir = DirAccess.open("res://spell_system/spells/")
 		if dir:
 			dir.list_dir_begin()
 			var file_name = dir.get_next()
 			while file_name != "":
+				print(dir.get_current_dir() + "/" + file_name)
 				if not dir.current_is_dir():
 					var r := ResourceLoader.load(dir.get_current_dir() + "/" + file_name)
 					self._all.append(r as Spell)
@@ -42,4 +44,24 @@ class Spells extends Table:
 				return spell
 		return null
 
+class Statuses extends Table:
+	func _init():
+		var dir = DirAccess.open("res://status_system/statuses/")
+		if dir:
+			dir.list_dir_begin()
+			var file_name = dir.get_next()
+			while file_name != "":
+				if not dir.current_is_dir():
+					print(dir.get_current_dir() + "/" + file_name)
+					var r := ResourceLoader.load(dir.get_current_dir() + "/" + file_name)
+					self._all.append(r as Status)
+				file_name = dir.get_next()
+		else:
+			assert(false, "An error occurred when trying to access the path.")
+		self._generate_keys()
+
+	func get_value(id: String) -> Status:
+		return super(id) as Status
+
 var spells := Spells.new()
+var statuses := Statuses.new()

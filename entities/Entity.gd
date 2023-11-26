@@ -7,7 +7,7 @@ var _max_hp: int
 var _current_hp: int
 var _name: String
 var _target: Entity
-var _statuses: Array[Status]
+var _statuses: Dictionary
 
 signal before_damage_taken(damage: int)
 
@@ -32,37 +32,36 @@ func take_damage(value: int) -> int:
 	
 	return _current_hp
 
-func apply_status(status: Status):
-	_statuses.append(status)
+func apply_status(status: String):
+	if _statuses.has(status):
+		_statuses[status] += 1
+	else:
+		_statuses[status] = 1
+	
 	StatusManager.apply(status, self)
 
-func has_stacks(status: Status) -> bool:
-	return _statuses.any(func(s): return s.id == status.id)
+func has_stacks(status: String) -> bool:
+	return _statuses.has(status) and _statuses[status] > 0
 
-func remove_stacks(status: Status, amount: int):
-	for i in range(len(_statuses), 0, -1):
-		var s := _statuses[i-1]
-		if s.id == status.id:
-			_statuses.remove_at(i-1)
-			amount -= 1
-		if amount < 1:
-			break
+func remove_stacks(status: String, amount: int):
+	if has_stacks(status):
+		_statuses[status] = maxi(_statuses[status] - amount, 0)
 
 func _on_damage_dealt(caster: Entity, value: int):
 	if caster == self and value != 0:
 		_target.take_damage(value)
 
 func _on_health_restored(caster: Entity, value: int):
-	if caster == self:
+	if caster == self and value != 0:
 		_current_hp = clampi(_current_hp + value, 0, _max_hp)
 		print("%s has restored %d HP" % [_name, value])
 		print("%s has %d / %d HP left" % [_name, _current_hp, _max_hp])
 
-func _on_buff_applied(caster: Entity, status: Status):
+func _on_buff_applied(caster: Entity, status: String):
 	if caster == self:
 		apply_status(status)
 
-func _on_debuff_applied(caster: Entity, status: Status):
+func _on_debuff_applied(caster: Entity, status: String):
 	if caster == self:
 		_target.apply_status(status)
 
